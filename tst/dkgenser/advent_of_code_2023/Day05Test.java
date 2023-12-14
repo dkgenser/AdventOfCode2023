@@ -107,6 +107,8 @@ class Day05Test {
         );
     }
 
+    //TODO: using ranges. Test case: one range + map -> split range converted.
+
     @ParameterizedTest
     @MethodSource("partTwoProvider")
     void partTwoTest(int expected, List<String> input) {
@@ -115,8 +117,7 @@ class Day05Test {
 
     private static Stream<Arguments> partTwoProvider() {
         return Stream.of(
-                Arguments.of(29, List.of("two1nine")),
-                Arguments.of(83, List.of("eightwothree"))
+                Arguments.of(46, EXAMPLE_INPUT)
         );
     }
 }
