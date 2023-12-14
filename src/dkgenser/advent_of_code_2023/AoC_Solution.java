@@ -10,14 +10,14 @@ import java.util.stream.Stream;
 public class AoC_Solution {
 
     public static void main(String[] args) {
-        String dayNumber = "05";
+        String dayNumber = "06";
         String fileName = "src/dkgenser/advent_of_code_2023/resources/aoc_day" + dayNumber;
 
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             List<String> input = stream.collect(Collectors.toList());
 
-            System.out.println("Part One Answer: " + Day05.solutionPartOne(input));
-            System.out.println("Part Two Answer: " + Day05.solutionPartTwo(input));
+            System.out.println("Part One Answer: " + Day06.solutionPartOne(input));
+            System.out.println("Part Two Answer: " + Day06.solutionPartTwo(input));
 
         } catch (IOException e) {
             e.printStackTrace();
