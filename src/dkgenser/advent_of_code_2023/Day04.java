@@ -1,5 +1,6 @@
 package dkgenser.advent_of_code_2023;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,35 @@ public final class Day04 {
     }
 
     public static int solutionPartTwo(List<String> args) {
-        return 0;
+        int[] winning = new int[args.size()];
+        //count number of winning numbers per card, then do the crazy card math
+        for (int i = 0; i < args.size(); i++) {
+            String card = args.get(i);
+            Matcher wNumbers = winningNumbersPattern.matcher(card);
+            wNumbers.find();
+            Set<Integer> winningNumbers = findNumbers(wNumbers.group());
+            //TODO: num check, I'm assuming no duplicates and since I'm using sets, ensure all sets have the same numbers across all cards
+            Matcher scratchNums = scratchNumbersPattern.matcher(card);
+            scratchNums.find();
+            Set<Integer> numbersIHave = findNumbers(scratchNums.group());
+            winning[i] = (int) numbersIHave.stream().filter(winningNumbers::contains).count();
+        }
+        // now add up how many cards this ends up as
+        return Arrays.stream(countCopies(winning)).sum();
+    }
+
+    static int[] countCopies(int[] winning) {
+        int numCards = winning.length;
+        int [] copies = new int[numCards];
+        Arrays.fill(copies, 1);
+        for (int i = 0; i < numCards; i++) {
+            int copyCount = copies[i];
+            int limit = Math.min(i + winning[i] + 1, numCards);
+            for (int j = i + 1; j < limit; j++) {
+                copies[j] = copies[j] + copyCount;
+            }
+        }
+        return copies;
     }
 
 }
