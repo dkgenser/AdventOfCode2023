@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public final class Day04 {
 
-    private static final char SPLIT_CHAR = '|';
     private static final Pattern numberPattern;
     private static final Pattern winningNumbersPattern;
     private static final Pattern scratchNumbersPattern;
