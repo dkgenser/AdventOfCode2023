@@ -9,16 +9,10 @@ import java.util.regex.Pattern;
  */
 public final class Day06 {
 
-    class RaceTuple {
-        int time;
-        int distRecord;
-    }
-
     private static final Pattern numberPattern;
     static {
         numberPattern = Pattern.compile("\\d+");
     }
-
 
     private Day06() {}
 
@@ -39,25 +33,30 @@ public final class Day06 {
         return sum;
     }
 
-    static int calculateWaysToWin(int time, int distRecord) {
+    static int calculateWaysToWin(int time, long distRecord) {
+        // Since time can be stored as an int, we know the number of possible solutions can also be an int
+        // (since the answer will always be <= time)
+        // However, the math that results in the distance travelled can overflow an int.
+
         // x = how long you hold the button
         // y = time left in the race once you let go
-        // x + y = total race time
+        // x + y = total race time (-> y = time - x)
         // x * y = distance traveled
         // solve for when x * y > distRecord, return the size of the range
         // x * (time - x) > distRecord
-        // x * time - x^2 > distRecord
-        int count = 0;
-        //brute solution
-        for (int i = 1; i < time; i++) {
-            if (i * (time - i) > distRecord) count++;
+        int marker = 0;
+        // cut off the first ineligible numbers
+        int slice = (int) (distRecord / time) - 1;
+        //find the first possibility, only need to go halfway since multiplication is commutative
+        for (int i = slice; i <= (time / 2); i++) {
+            if (Math.multiplyExact((long) i,(time - i)) > distRecord) {
+                marker = i;
+                break;
+            }
         }
-
-        return count;
+        return (int) (time - 2 * marker + 1);
     }
 
-    public static int solutionPartTwo(List<String> args) {
-        return 0;
-    }
+    // Part two was just an update to the above, no new distinct code
 
 }

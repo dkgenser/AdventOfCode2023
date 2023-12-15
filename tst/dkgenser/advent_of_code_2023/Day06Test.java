@@ -32,7 +32,7 @@ class Day06Test {
 
     @ParameterizedTest
     @MethodSource("waysToWinProvider")
-    void waysToWinTest(int expected, int time, int distanceRecord) {
+    void waysToWinTest(int expected, int time, long distanceRecord) {
         assertEquals(expected, Day06.calculateWaysToWin(time, distanceRecord));
     }
 
@@ -40,20 +40,10 @@ class Day06Test {
         return Stream.of(
                 Arguments.of(4, 7, 9),
                 Arguments.of(8, 15, 40),
-                Arguments.of(9, 30, 200)
-        );
-    }
+                Arguments.of(9, 30, 200),
+                Arguments.of(71503, 71530, 940200)
+                //Arguments.of(X, 45977295, 305106211101695l) this is the puzzle input
 
-    @ParameterizedTest
-    @MethodSource("partTwoProvider")
-    void partTwoTest(int expected, List<String> input) {
-        assertEquals(expected, Day06.solutionPartTwo(input));
-    }
-
-    private static Stream<Arguments> partTwoProvider() {
-        return Stream.of(
-                Arguments.of(29, List.of("two1nine")),
-                Arguments.of(83, List.of("eightwothree"))
         );
     }
 }

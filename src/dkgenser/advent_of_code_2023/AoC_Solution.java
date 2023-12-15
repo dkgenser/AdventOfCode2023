@@ -17,7 +17,7 @@ public class AoC_Solution {
             List<String> input = stream.collect(Collectors.toList());
 
             System.out.println("Part One Answer: " + Day06.solutionPartOne(input));
-            System.out.println("Part Two Answer: " + Day06.solutionPartTwo(input));
+            //System.out.println("Part Two Answer: " + Day06.solutionPartTwo(input));
 
         } catch (IOException e) {
             e.printStackTrace();
